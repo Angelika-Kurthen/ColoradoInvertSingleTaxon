@@ -15,7 +15,7 @@ library(devtools)
 library(foodbase)
 
 
-source("NZMS_1sp_Model.R")
+source("ColoradoInvertSingleTaxon/Scripts/NZMS_1sp_Model.R")
 
 discharge <- readNWISdv("09380000", "00060", "2007-10-01", "2023-05-01")
 flow.magnitude <- TimestepDischarge(discharge, 85000)
@@ -124,16 +124,28 @@ NZMSts <- ggplot(data = cor.df[-nrow(cor.df), ], aes(x = V1, y = scale(mean.abun
   #geom_point(aes(x = last(cor.df$V1), y = last(scale(cor.df$V2)), color = "Empirical"), size = 2, show.legend = FALSE) +
   labs(y= "Scaled Abundance", title = expression(paste(italic("P. antipodarum"))))+
   ylim(c(-4,7))+
-  geom_text(mapping = aes(x = as.Date("2018-01-01"), y =5, label = paste('rho', "==", 0.63)), parse = T, color = "black", size = 5.5)+
-  geom_text(mapping = aes(x = as.Date("2018-01-01"), y =5.75, label = paste('C = 94%')), color = "black", size = 5.5)+
-  geom_text(mapping = aes(x = as.Date("2018-01-01"), y =6.5, label = paste('Scaled RMSE = 1.19')), color = "black", size = 5.5)+
-  xlab("")+
+  # Shift the date earlier to move the text left (e.g., from 2018-01-01 to 2017-06-01)
+  geom_text(mapping = aes(x = as.Date("2017-06-01"), y = 5, label = paste('rho', "==", 0.63)), parse = T, color = "black", size = 5.5) +
+  geom_text(mapping = aes(x = as.Date("2017-06-01"), y = 5.75, label = paste('C = 94%')), color = "black", size = 5.5) +
+  geom_text(mapping = aes(x = as.Date("2017-06-01"), y = 6.5, label = paste('Scaled RMSE = 1.19')), color = "black", size = 5.5) +  xlab("")+
   labs(colour=" ")+
   theme_bw()+
   scale_color_manual(values = colors)+
   theme(text = element_text(size = 15), axis.text.x = element_text(angle=45, hjust = 1, size = 15), 
         axis.text.y = element_text(size = 15), )+
   scale_x_date(date_labels="%Y")
+
+NZMSraw <- ggplot(data = NZMS.samp.sum, aes(x = V1, y = V2, group = 1, color = "Model")) +
+  geom_line(show.legend = F, linewidth = 1, alpha = 0.8) +
+  geom_point(size = 2, show.legend = FALSE) +
+  #geom_point(aes(x = last(cor.df$V1), y = last(scale(cor.df$V2)), color = "Empirical"), size = 2, show.legend = FALSE) +
+  labs(y= "Density", x = "Year", title = expression(paste(italic("P. antipodarum"))))+
+  theme_bw()+
+  scale_color_manual(values = "#4477AA")+
+  theme(text = element_text(size = 15), axis.text.x = element_text(angle=45, hjust = 1, size = 15), 
+        axis.text.y = element_text(size = 15), )+
+  scale_x_date(date_labels="%Y")
+
 ##################
 # N mix models
 ##################

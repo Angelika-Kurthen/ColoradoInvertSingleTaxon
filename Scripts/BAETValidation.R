@@ -105,6 +105,16 @@ BAETts <- ggplot(data = means.list.BAET, aes(x = `temps$dts`,  y = scale(mean.ab
         axis.text.y = element_text(size = 15), )+
   scale_x_date(date_labels="%Y")
 
+BAETraw <- ggplot(data = BAET.samp.sum, aes(x = V1,  y = V2, group = 1, color = "Model")) +
+  geom_line(show.legend = F, linewidth = 1, alpha = 0.8) +
+  geom_point(size = 2, show.legend = F)+
+  labs(y= "Density", x = "Year", title = expression(paste(italic("Baetidae"), " spp.") ))+
+  theme_bw()+
+  scale_color_manual(values = "#66CCEE")+
+  theme(text = element_text(size = 15), axis.text.x = element_text(angle=45, hjust = 1, size = 15), 
+        axis.text.y = element_text(size = 15), )+
+  scale_x_date(date_labels="%Y")
+
 # Thats nice but maybe n mix will be better
 # we have discharge from 1956 on
 discharge <- readNWISdv("09234500", "00060", "1986-05-01", "1999-10-21", statCd = "00003")

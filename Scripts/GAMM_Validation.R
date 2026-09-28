@@ -134,6 +134,20 @@ GAMMts <- ggplot(data = means.list.GAMMnonas[-nrow(means.list.GAMMnonas), ], aes
         axis.text.y = element_text(size = 15)) +
   scale_x_date(date_labels = "%Y")
 
+
+
+GAMMraw <- ggplot(data = GAMM.samp, aes(x = Group.1, y = x, group = 1, color = "Model")) +
+  geom_point(size = 2,show.legend = F )+
+  geom_line(linewidth = 1, alpha = 0.8, show.legend = F) +
+  labs(y = "Density", title = expression(italic("G. lacustris"))) +
+  xlab("Year") +
+  scale_color_manual(values = "#CCBB44") +
+  theme_bw() +
+  theme(text = element_text(size = 15), 
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 15),
+        axis.text.y = element_text(size = 15)) +
+  scale_x_date(date_labels = "%Y")
+
 ##################
 # N mix models
 ##################

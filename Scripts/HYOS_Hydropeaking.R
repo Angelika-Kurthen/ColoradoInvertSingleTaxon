@@ -8,7 +8,7 @@ library(foreach)
 # Load custom functions and data
 
 source("ColoradoInvertSingleTaxon/Scripts/1spFunctions.R")
-source("ColoradoInvertSingleTaxon/Scripts/HYOS_1sp.R")
+source("ColoradoInvertSingleTaxon/Scripts/HYOS_1sp_Model.R")
 
 
 # read in LF temp and discharge data from 2007 to 2023
@@ -87,7 +87,7 @@ stopCluster(cl)
 results_df <- as.data.frame(results)
 colnames(results_df) <- c("Hydropeak", "MeanAbund", "SdAbund", "SizeMean", "SizeSd", "S3Yrprod","S3Yrprodsd")
 # Save the results as a CSV file
-write.csv(results_df, file = "hyos_hydropeaking_results.csv", row.names = FALSE)
+write.csv(results_df, file = "ColoradoInvertSingleTaxon/Data/hyos_hydropeaking_results.csv", row.names = FALSE)
 
 # compile abundance data
 #HYOS_hyd_means <- as.data.frame(cbind(hydropeak, means, sd, rep("HYOS", length(means))))

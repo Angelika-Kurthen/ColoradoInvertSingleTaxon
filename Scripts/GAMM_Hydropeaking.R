@@ -83,7 +83,7 @@ stopCluster(cl)
 results_df <- as.data.frame(results)
 colnames(results_df) <- c("Hydropeak", "MeanAbund", "SdAbund", "SizeMean", "SizeSd", "S3Yrprod", "S3Yrprodsd")
 # Save the results as a CSV file
-write.csv(results_df, file = "gamm_hydropeaking_results.csv", row.names = FALSE)
+write.csv(results_df, file = "ColoradoInvertSingleTaxon/Data/gamm_hydropeaking_results.csv", row.names = FALSE)
 
 # compile abundance data
 #GAMM_hyd_means <- as.data.frame(cbind(hydropeak, means, sd, rep("GAMM", length(means))))
